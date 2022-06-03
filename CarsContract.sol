@@ -14,7 +14,7 @@ contract CarsContract {
     
     constructor() {
 
-        buyToken = new buyToken();
+        buyToken = new BuyToken();
         carOwner = payable(msg.sender);
         balances[carOwner] = buyToken.totalSupply();
 
@@ -56,10 +56,10 @@ contract CarsContract {
         address Purchaser = payable(msg.sender);
         
         
-        owner.transfer(purchaseRequest); //Here we are going to send the money to the owner of the contract
+        carOwner.transfer(purchaseRequest); //Here we are going to send the money to the owner of the contract
 
         
-        feedToken.transfer(Purchaser, purchaseRequest); //Here we are sending the token to the purchaser
+        buyToken.transfer(Purchaser, purchaseRequest); //Here we are sending the token to the purchaser
 
         
         balances[carOwner] = balances[carOwner] - purchaseRequest;//Here we are updating the values of the balances
@@ -137,5 +137,6 @@ contract CarsContract {
 
         balances[carOwner] = balances[carOwner] + fuelPurchaseRequest; //Updating the values accordingly
         balances[fuelBuyer] = balances[fuelBuyer] - fuelPurchaseRequest;
-        foodBalances[fuelBuyer] = fuel;
+        fuelBalances[fuelBuyer] = fuel;
     }
+}
